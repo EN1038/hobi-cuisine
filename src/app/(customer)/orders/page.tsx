@@ -9,6 +9,7 @@ import { motion } from 'framer-motion';
 import { ClipboardList, ChevronRight, Package, RefreshCw } from 'lucide-react';
 import { useAuthStore } from '@/stores/authStore';
 import { getOrdersByUser } from '@/db/operations';
+import { useAppStore } from '@/stores/appStore';
 import { formatPrice, formatDateTime, getStatusInfo, getOrderTypeInfo } from '@/lib/utils';
 import type { Order } from '@/types';
 import Link from 'next/link';
@@ -18,16 +19,17 @@ export default function OrdersPage() {
   const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<'all' | 'active' | 'completed'>('all');
+  const dbReady = useAppStore((s) => s.dbReady);
 
   useEffect(() => {
+    if (!dbReady || !user?.id) return;
     async function loadOrders() {
-      if (!user?.id) return;
-      const data = await getOrdersByUser(user.id);
+      const data = await getOrdersByUser(user!.id!);
       setOrders(data);
       setLoading(false);
     }
     loadOrders();
-  }, [user]);
+  }, [user, dbReady]);
 
   if (!user) {
     return (

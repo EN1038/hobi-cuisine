@@ -6,14 +6,17 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { MapPin, Phone, Clock, ArrowRight, UtensilsCrossed } from 'lucide-react';
 import { getAvailableMenuItems } from '@/db/operations';
+import { useAppStore } from '@/stores/appStore';
 import { formatPrice } from '@/lib/utils';
 import type { MenuItem } from '@/types';
 
 export default function MarketingHomePage() {
   const [popularItems, setPopularItems] = useState<MenuItem[]>([]);
   const [loading, setLoading] = useState(true);
+  const dbReady = useAppStore((s) => s.dbReady);
 
   useEffect(() => {
+    if (!dbReady) return;
     async function load() {
       try {
         const items = await getAvailableMenuItems();
@@ -25,7 +28,7 @@ export default function MarketingHomePage() {
       }
     }
     load();
-  }, []);
+  }, [dbReady]);
 
   const newsItems = [
     {

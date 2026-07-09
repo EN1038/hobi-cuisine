@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { Star, Gift, ChevronRight, History, Crown } from 'lucide-react';
 import { useAuthStore } from '@/stores/authStore';
 import { getLoyaltyHistory } from '@/db/operations';
+import { useAppStore } from '@/stores/appStore';
 import { formatDateTime, getTierInfo } from '@/lib/utils';
 import type { LoyaltyTransaction } from '@/types';
 import Link from 'next/link';
@@ -13,8 +14,10 @@ export default function LoyaltyPage() {
   const { user } = useAuthStore();
   const [transactions, setTransactions] = useState<LoyaltyTransaction[]>([]);
   const [loading, setLoading] = useState(true);
+  const dbReady = useAppStore((s) => s.dbReady);
 
   useEffect(() => {
+    if (!dbReady) return;
     async function load() {
       if (user?.id) {
         const data = await getLoyaltyHistory(user.id);
@@ -23,7 +26,7 @@ export default function LoyaltyPage() {
       setLoading(false);
     }
     load();
-  }, [user]);
+  }, [user, dbReady]);
 
   if (!user) {
     return (

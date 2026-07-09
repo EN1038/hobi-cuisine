@@ -12,6 +12,7 @@ interface AppState {
   isSidebarOpen: boolean;
   isCartOpen: boolean;
   notification: { message: string; type: 'success' | 'error' | 'info' } | null;
+  dbReady: boolean;
 
   setTheme: (theme: 'dark' | 'light') => void;
   toggleSidebar: () => void;
@@ -20,6 +21,7 @@ interface AppState {
   setCartOpen: (open: boolean) => void;
   showNotification: (message: string, type?: 'success' | 'error' | 'info') => void;
   clearNotification: () => void;
+  setDbReady: (ready: boolean) => void;
 }
 
 export const useAppStore = create<AppState>()(
@@ -29,6 +31,7 @@ export const useAppStore = create<AppState>()(
       isSidebarOpen: false,
       isCartOpen: false,
       notification: null,
+      dbReady: false,
 
       setTheme: (theme) => set({ theme }),
       toggleSidebar: () => set((s) => ({ isSidebarOpen: !s.isSidebarOpen })),
@@ -41,6 +44,7 @@ export const useAppStore = create<AppState>()(
         setTimeout(() => set({ notification: null }), 4000);
       },
       clearNotification: () => set({ notification: null }),
+      setDbReady: (ready) => set({ dbReady: ready }),
     }),
     {
       name: 'hobi-app',

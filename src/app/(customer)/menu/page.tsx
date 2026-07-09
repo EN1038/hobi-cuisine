@@ -33,8 +33,10 @@ const MenuContent = () => {
   const [specialInstructions, setSpecialInstructions] = useState('');
 
   const cart = useCartStore();
+  const dbReady = useAppStore((s) => s.dbReady);
 
   useEffect(() => {
+    if (!dbReady) return;
     async function load() {
       const [cats, items] = await Promise.all([
         getAllCategories(),
@@ -60,7 +62,7 @@ const MenuContent = () => {
       setLoading(false);
     }
     load();
-  }, [catIdParam, itemIdParam, tableParam]);
+  }, [dbReady, catIdParam, itemIdParam, tableParam]);
 
   const filteredItems = menuItems.filter(item => {
     const matchesCat = activeCategory === 'all' || item.categoryId === activeCategory;
