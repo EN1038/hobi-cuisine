@@ -36,12 +36,12 @@ export default function CustomerLayout({ children }: { children: React.ReactNode
       <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm border-b border-[#88042b]/10">
         <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <Link href="/" className="relative h-10 w-32 flex items-center overflow-hidden group transition-transform hover:scale-105">
+            <Link href="/" className="relative h-10 w-40 flex items-center group transition-transform hover:scale-105 overflow-visible">
               <Image 
                 src="/images/logo-section-2.png" 
                 alt="HOBI Cuisine Logo" 
                 fill
-                className="object-contain object-left scale-[2.5] origin-left"
+                className="object-contain object-left scale-[2.0] origin-left"
                 style={{ filter: 'brightness(0) saturate(100%) invert(11%) sepia(61%) saturate(5412%) hue-rotate(336deg) brightness(94%) contrast(109%)' }}
                 priority
               />
