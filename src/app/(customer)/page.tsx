@@ -48,7 +48,7 @@ export default function MarketingHomePage() {
   return (
     <div className="min-h-screen bg-[#f6e5cc] text-[#88042b] overflow-x-hidden pb-20 md:pb-0">
       {/* 1. HERO SECTION */}
-      <section className="relative w-full h-[85vh] flex flex-col items-center justify-center overflow-hidden">
+      <section className="relative w-full min-h-[85vh] py-20 flex flex-col items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image 
             src="/images/bg-section-hero.png" 
