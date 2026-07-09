@@ -1,0 +1,85 @@
+@import "tailwindcss";
+
+@theme {
+  --color-chinese-red: #C41E3A;
+  --color-deep-red: #8B0000;
+  --color-hobi-red: #88042b;
+  --color-hobi-cream: #f6e5cc;
+  --color-imperial-gold: #DAA520;
+  --color-bright-gold: #FFD700;
+  --color-jade: #2E8B57;
+  --color-dark-bg: #0a0a0a;
+  --color-surface: #111827;
+  --color-surface-light: #1f2937;
+  --font-sans: var(--font-prompt), var(--font-inter), sans-serif;
+}
+
+@layer base {
+  body {
+    font-family: var(--font-prompt), var(--font-inter), sans-serif !important;
+    @apply bg-[#f6e5cc] text-[#88042b] antialiased selection:bg-[#88042b] selection:text-white;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white/40 backdrop-blur-md border border-[#88042b]/10;
+  }
+  
+  .glass-strong {
+    @apply bg-white/60 backdrop-blur-xl border border-[#88042b]/20 shadow-xl;
+  }
+
+  .text-gradient-gold {
+    @apply text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-bright-gold)] to-[var(--color-imperial-gold)];
+  }
+
+  /* Custom scrollbar */
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes pulse-gold {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.4); }
+  50% { box-shadow: 0 0 0 10px rgba(255, 215, 0, 0); }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.5s ease-out forwards;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out forwards;
+}
+
+/* Print Styles for Receipts */
+@media print {
+  body {
+    @apply bg-white text-black;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+  @page {
+    margin: 0;
+    size: 80mm 200mm;
+  }
+}
