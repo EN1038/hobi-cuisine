@@ -38,6 +38,26 @@ export default function LoyaltyPage() {
     );
   }
 
+  if (loading) {
+    return (
+      <div className="min-h-screen pb-24 bg-[#f6e5cc] pt-20 px-4">
+        <div className="bg-gray-200 rounded-3xl h-36 animate-pulse mb-6" />
+        <div className="space-y-3">
+          {[...Array(4)].map((_, i) => (
+            <div key={i} className="bg-white rounded-2xl p-4 flex items-center gap-3 animate-pulse">
+              <div className="w-10 h-10 rounded-full bg-gray-200" />
+              <div className="flex-1 space-y-2">
+                <div className="h-4 bg-gray-200 rounded w-3/4" />
+                <div className="h-3 bg-gray-100 rounded w-1/2" />
+              </div>
+              <div className="h-5 w-12 bg-gray-200 rounded" />
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
   const tierInfo = getTierInfo(user.loyaltyTier);
 
   return (

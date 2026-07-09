@@ -158,6 +158,36 @@ const MenuContent = () => {
     // alert('เพิ่มลงตะกร้าแล้ว');
   };
 
+  if (loading) {
+    return (
+      <div className="pb-24 pt-20 min-h-screen bg-[#f6e5cc] px-4">
+        {/* Search skeleton */}
+        <div className="sticky top-[64px] z-40 bg-[#f6e5cc]/95 backdrop-blur-md px-4 py-3 border-b border-yellow-900/10 mb-4">
+          <div className="h-10 bg-white/60 rounded-xl animate-pulse max-w-3xl mx-auto" />
+        </div>
+        {/* Category skeleton */}
+        <div className="flex gap-2 overflow-x-hidden mb-6">
+          {[...Array(5)].map((_, i) => (
+            <div key={i} className="h-9 w-24 bg-white/60 rounded-lg animate-pulse shrink-0" />
+          ))}
+        </div>
+        {/* Grid skeleton */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          {[...Array(8)].map((_, i) => (
+            <div key={i} className="bg-white rounded-2xl overflow-hidden animate-pulse">
+              <div className="h-40 bg-gray-200" />
+              <div className="p-3 space-y-2">
+                <div className="h-4 bg-gray-200 rounded w-3/4" />
+                <div className="h-3 bg-gray-100 rounded w-1/2" />
+                <div className="h-4 bg-gray-200 rounded w-1/3" />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="pb-24 pt-20 max-w-7xl mx-auto px-4 min-h-screen bg-[#f6e5cc] text-gray-800">
       

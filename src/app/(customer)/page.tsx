@@ -11,12 +11,18 @@ import type { MenuItem } from '@/types';
 
 export default function MarketingHomePage() {
   const [popularItems, setPopularItems] = useState<MenuItem[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function load() {
-      const items = await getAvailableMenuItems();
-      // Get 4 popular items
-      setPopularItems(items.filter(i => i.isPopular).slice(0, 4));
+      try {
+        const items = await getAvailableMenuItems();
+        setPopularItems(items.filter(i => i.isPopular).slice(0, 4));
+      } catch (e) {
+        console.error(e);
+      } finally {
+        setLoading(false);
+      }
     }
     load();
   }, []);
@@ -44,6 +50,17 @@ export default function MarketingHomePage() {
       image: '/images/bg-section-hero1.png'
     }
   ];
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-[#f6e5cc] flex items-center justify-center">
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-10 h-10 border-4 border-[#88042b]/20 border-t-[#88042b] rounded-full animate-spin" />
+          <span className="text-[#88042b]/60 text-sm font-medium">กำลังโหลด...</span>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[#f6e5cc] text-[#88042b] overflow-x-hidden pb-20 md:pb-0">
