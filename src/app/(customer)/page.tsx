@@ -275,12 +275,14 @@ export default function MarketingHomePage() {
             
             {/* Brand */}
             <div className="col-span-1 md:col-span-2 lg:col-span-1">
-              <div className="relative w-64 h-20 mb-6 overflow-visible flex items-center">
+              <div className="mb-6">
                 <Image 
                   src="/images/logo-section-2.png" 
                   alt="HOBI Cuisine Logo" 
-                  fill
-                  className="object-contain scale-[1.8] origin-left drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]"
+                  width={200}
+                  height={65}
+                  className="h-16 w-auto object-contain drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]"
+                  style={{ filter: 'brightness(0) invert(1)' }}
                 />
               </div>
               <p className="text-[#f6e5cc]/80 text-sm leading-relaxed mb-6">
